@@ -40,5 +40,4 @@ if __name__ == "__main__":
 
     # Problem 3-1
     characters = get_characters_table(INPUT_3_PATH)
-    test = isolate_digits(characters)
-    print(sum(isolate_digits(characters)))
+    print(f"Solution 3-1: {sum(isolate_digits(characters))}")
