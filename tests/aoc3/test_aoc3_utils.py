@@ -7,6 +7,7 @@ from advent2023.aoc3.utils import (
     neighbors_digit,
     find_digits_of_interest,
     isolate_digits,
+    two_around,
 )
 
 data = [
@@ -23,21 +24,6 @@ data3 = [
     ["1", "2", ".", "*"],
     ["3", ".", "7", "1"],
     ["4", "5", ".", "."],
-]
-data_str = [
-    ["1.*"],
-    ["571"],
-    [".%."],
-]
-data2_str = [
-    ["1.*"],
-    ["571"],
-    ["2%."],
-]
-data3_str = [
-    ["12*"],
-    ["3.1"],
-    ["45."],
 ]
 
 
@@ -225,6 +211,37 @@ def test_isolate_digits():
 
 
 def test_get_all_character_indexes():
-    assert get_all_character_indexes(".", data_str) == [(2, 0), (0, 1), (2, 2)]
-    assert get_all_character_indexes("*", data2_str) == [(0, 2)]
-    assert get_all_character_indexes("?", data3_str) == []
+    assert set(get_all_character_indexes(".", data)) == set([(2, 0), (0, 1), (2, 2)])
+    assert set(get_all_character_indexes("*", data2)) == set([(0, 2)])
+    assert set(get_all_character_indexes("?", data3)) == set([])
+
+
+def test_two_around():
+    assert (
+        two_around(
+            np.array(
+                [[False, False, False], [False, True, False], [False, False, False]]
+            )
+        )
+        == 1
+    )
+    assert (
+        two_around(
+            np.array([[True, False, True], [False, False, False], [False, True, False]])
+        )
+        == 3
+    )
+    assert (
+        two_around(
+            np.array(
+                [[True, True, False], [False, False, False], [False, False, False]]
+            )
+        )
+        == 1
+    )
+    assert (
+        two_around(
+            np.array([[True, True, True], [False, False, False], [False, False, False]])
+        )
+        == 1
+    )

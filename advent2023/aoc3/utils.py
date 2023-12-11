@@ -36,7 +36,7 @@ def neighbors_digit(pos: np.ndarray) -> np.ndarray:
     return pos
 
 
-def find_digits_of_interest(table: list[list[str]]) -> None:
+def find_digits_of_interest(table: list[list[str]]) -> np.ndarray:
     # Detect postions of digits and symbols
     digit_mat = digit_pos(table)
     symb_mat = symbole_pos(table)
@@ -66,10 +66,69 @@ def isolate_digits(table: list[list[str]]) -> list[int]:
     return res
 
 
-def get_all_character_indexes(c: str, table: list[str]) -> list[tuple[int]]:
+def get_all_character_indexes(c: str, table: list[str]) -> list[tuple[int, int]]:
     indexes = []
     for i, line in enumerate(table):
         for j, ltr in enumerate(line):
             if ltr == c:
                 indexes.append((i, j))
     return indexes
+
+
+def get_box_around(pos: tuple[int, int], is_int: np.ndarray) -> np.ndarray:
+    len_line = is_int.shape[0]
+    len_col = is_int.shape[1]
+    return is_int[
+        max(pos[0] - 1, 0) : min(pos[0] + 2, len_line),
+        max(pos[1] - 1, 0) : min(pos[1] + 2, len_col),
+    ]
+
+
+def two_around(box: np.ndarray):
+    def weird_sum_line(line: np.ndarray) -> int:
+        line = line.astype(int)
+        return line[1] or (line[0] + line[2])
+
+    return weird_sum_line(box[0]) + weird_sum_line(box[1]) + weird_sum_line(box[2])
+
+
+def get_int(pos: tuple[int, int], is_int: np.ndarray, table: list[list[str]]):
+    pos_min = list(pos)
+    pos_max = list(pos)
+    while pos_min[1] >= 0 and is_int[pos_min[0], pos_min[1]]:
+        pos_min[1] -= 1
+    pos_min[1] += 1
+    while pos_max[1] < is_int.shape[1] and is_int[pos_max[0], pos_max[1]]:
+        pos_max[1] += 1
+    pos_max[1] -= 1
+    return int("".join(table[pos[0]][pos_min[1] : pos_max[1] + 1]))
+
+
+def get_gear_ratio(
+    pos: tuple[int, int], box: np.array, is_int: np.ndarray, table: list[list[str]]
+):
+    arg_pos = box.max(axis=1)
+    pos_per_line = {(a - 1): b - 1 for a, b in zip(*(np.where(box)))}
+    nb_lines = arg_pos.sum()
+    if nb_lines == 1:
+        pos1 = (pos[0] + arg_pos.argmax() - 1, pos[1] - 1)
+        pos2 = (pos[0] + arg_pos.argmax() - 1, pos[1] + 1)
+        first_int = get_int(pos1, is_int, table)
+        second_int = get_int(pos2, is_int, table)
+    else:
+        all_ints = []
+        for line in pos_per_line:
+            all_ints.append(
+                get_int((pos[0] + line, pos[1] + pos_per_line[line]), is_int, table)
+            )
+        first_int = all_ints[0]
+        second_int = all_ints[1]
+    return first_int * second_int
+
+
+def get_gears(table: list[list[str]]) -> int:
+    valid_ints = find_digits_of_interest(table)
+    poses = get_all_character_indexes("*", table)
+    boxes = [get_box_around(pos, valid_ints) for pos in poses]
+    valid_boxes = [(box, pos) for box, pos in zip(boxes, poses) if two_around(box) == 2]
+    return [get_gear_ratio(pos, box, valid_ints, table) for box, pos in valid_boxes]

@@ -2,7 +2,7 @@ import numpy as np
 from utils import get_characters_table, get_lines
 from aoc1.utils import extract_first_last_digit, transform_text_digits_to_digits
 from aoc2.utils import extract_game, max_product, possible_max
-from aoc3.utils import digit_pos, isolate_digits, neighbors_symb, symbole_pos
+from aoc3.utils import get_gears, isolate_digits
 
 
 if __name__ == "__main__":
@@ -41,3 +41,7 @@ if __name__ == "__main__":
     # Problem 3-1
     characters = get_characters_table(INPUT_3_PATH)
     print(f"Solution 3-1: {sum(isolate_digits(characters))}")
+
+    # Problem 3-2
+    characters = get_characters_table(INPUT_3_PATH)
+    print(f"Solution 3-2: {sum(get_gears(characters))}")
