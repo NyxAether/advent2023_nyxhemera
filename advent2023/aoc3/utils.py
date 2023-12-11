@@ -64,3 +64,12 @@ def isolate_digits(table: list[list[str]]) -> list[int]:
     for line in characters:
         res.extend([int(v.group()) for v in re.finditer(r"\d+", "".join(line))])
     return res
+
+
+def get_all_character_indexes(c: str, table: list[str]) -> list[tuple[int]]:
+    indexes = []
+    for i, line in enumerate(table):
+        for j, ltr in enumerate(line):
+            if ltr == c:
+                indexes.append((i, j))
+    return indexes

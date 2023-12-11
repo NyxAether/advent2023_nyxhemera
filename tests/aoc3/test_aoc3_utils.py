@@ -1,5 +1,6 @@
 import numpy as np
 from advent2023.aoc3.utils import (
+    get_all_character_indexes,
     symbole_pos,
     digit_pos,
     neighbors_symb,
@@ -22,6 +23,21 @@ data3 = [
     ["1", "2", ".", "*"],
     ["3", ".", "7", "1"],
     ["4", "5", ".", "."],
+]
+data_str = [
+    ["1.*"],
+    ["571"],
+    [".%."],
+]
+data2_str = [
+    ["1.*"],
+    ["571"],
+    ["2%."],
+]
+data3_str = [
+    ["12*"],
+    ["3.1"],
+    ["45."],
 ]
 
 
@@ -206,3 +222,9 @@ def test_isolate_digits():
     assert isolate_digits(data) == [571]
     assert isolate_digits(data2) == [571, 2]
     assert isolate_digits(data3) == [71]
+
+
+def test_get_all_character_indexes():
+    assert get_all_character_indexes(".", data_str) == [(2, 0), (0, 1), (2, 2)]
+    assert get_all_character_indexes("*", data2_str) == [(0, 2)]
+    assert get_all_character_indexes("?", data3_str) == []
