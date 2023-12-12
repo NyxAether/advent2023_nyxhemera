@@ -1,4 +1,3 @@
-import numpy as np
 from utils import get_cards, get_characters_table, get_lines, parse_race, parse_seeds
 from aoc1.utils import extract_first_last_digit, transform_text_digits_to_digits
 from aoc2.utils import extract_game, max_product, possible_max
@@ -14,15 +13,15 @@ if __name__ == "__main__":
     lines = get_lines(INPUT_1_PATH)
 
     # Problem 1-1
-    res_1 = sum([extract_first_last_digit(line) for line in lines])
+    res_1 = sum((extract_first_last_digit(line) for line in lines))
     print(f"Solution 1-1: {res_1}")
 
     # Problem 1-2
     res_2 = sum(
-        [
+        (
             extract_first_last_digit(transform_text_digits_to_digits(line))
             for line in lines
-        ]
+        )
     )
     print(f"Solution 1-2: {res_2}")
 
@@ -54,11 +53,11 @@ if __name__ == "__main__":
 
     # Problem 4-1
     wins, values = get_cards(INPUT_4_PATH)
-    print(f"Solution 4-1: {score(wins, values)}")  
+    print(f"Solution 4-1: {score(wins, values)}")
 
     # Problem 4-2
     wins, values = get_cards(INPUT_4_PATH)
-    print(f"Solution 4-2: {total_cards(wins, values)}")    
+    print(f"Solution 4-2: {total_cards(wins, values)}")
 
     # AOC 5
     INPUT_5_PATH = "data/input5.txt"

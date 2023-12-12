@@ -9,5 +9,6 @@ def wins_product(times: list[int], distances: list[int]) -> int:
 
 
 def count_wins(time: int, best_distance: int) -> int:
-    press_time = np.arange(time + 1)
-    return ((time - press_time) * press_time > best_distance).sum()
+    # Cast is necessary on windows
+    press_time = np.arange(time + 1).astype('int64')
+    return (((time - press_time) * press_time) > best_distance).sum()

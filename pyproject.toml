@@ -6,6 +6,8 @@ authors = ["NyxAether <contact.nyxhemera@gmail.com>"]
 license = "BSD 2"
 readme = "README.md"
 
+
+
 [tool.poetry.dependencies]
 python = "^3.10"
 numpy = "^1.26.2"
@@ -17,3 +19,6 @@ pandas = "^2.1.4"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[flake8]
+max-line-length = 120
