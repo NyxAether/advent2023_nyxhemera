@@ -1,10 +1,11 @@
 import numpy as np
-from utils import get_cards, get_characters_table, get_lines, parse_seeds
+from utils import get_cards, get_characters_table, get_lines, parse_race, parse_seeds
 from aoc1.utils import extract_first_last_digit, transform_text_digits_to_digits
 from aoc2.utils import extract_game, max_product, possible_max
 from aoc3.utils import get_gears, isolate_digits
 from aoc4.utils import score, total_cards
 from aoc5.almanach import Almanach
+from aoc6.utils import count_wins, wins_product
 
 
 if __name__ == "__main__":
@@ -68,3 +69,13 @@ if __name__ == "__main__":
 
     # Problem 5-2
     print(f"Solution 5-2: {alma.find_closest_position_from_tuple()}")
+
+    # AOC 6
+    INPUT_6_PATH = "data/input6.txt"
+
+    # Problem 6-1
+    times, distances = parse_race(INPUT_6_PATH)
+    print(f"Solution 6-1: {wins_product(times,distances)}")
+
+    # Problem 6-2
+    print(f"Solution 6-2: {count_wins(44826981, 202107611381458)}")

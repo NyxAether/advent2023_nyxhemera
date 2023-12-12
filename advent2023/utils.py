@@ -90,3 +90,12 @@ def parse_seeds(path: str):
         temp_hum,
         hum_loc,
     )
+
+
+def parse_race(path: str) -> tuple[list[int], list[int]]:
+    with Path(path).open("r", encoding="utf-8") as f:
+        times = re.split(r"\s+", f.readline().strip())[1:]
+        times = [int(t) for t in times]
+        distances = re.split(r"\s+", f.readline().strip())[1:]
+        distances = [int(d) for d in distances]
+    return times, distances

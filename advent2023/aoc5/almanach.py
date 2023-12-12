@@ -32,12 +32,14 @@ class Almanach:
     def find_closest_position(self) -> int:
         all_pos = [self.get_position(seed) for seed in self.seeds]
         return min(all_pos)
-    
+
     def find_closest_position_from_tuple(self):
         all_pos = self.get_positions_tuple(self.alt_seeds)
-        return min((k for k,_ in all_pos))
+        return min((k for k, _ in all_pos))
 
-    def get_positions_tuple(self, seeds: list[tuple[int, int]]) -> list[tuple[int, int]]:
+    def get_positions_tuple(
+        self, seeds: list[tuple[int, int]]
+    ) -> list[tuple[int, int]]:
         current = seeds
         for ft in self.from_to:
             next_range = []
@@ -70,9 +72,9 @@ class Almanach:
             if range_key <= keys_left:
                 return [(self.__equivalence(key, ft), range_key)]
             else:
-                return [(self.__equivalence(key, ft), keys_left)] + self.__tuple_equivalence(
-                    key + keys_left, range_key - keys_left, ft
-                )
+                return [
+                    (self.__equivalence(key, ft), keys_left)
+                ] + self.__tuple_equivalence(key + keys_left, range_key - keys_left, ft)
         else:
             return [(key, range_key)]
 
