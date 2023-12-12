@@ -41,3 +41,52 @@ def get_cards(path: str) -> tuple[set[int], set[int]]:
             wins.append(set(int(v_win) for v_win in re.split(r"\s+", winning.strip())))
             values.append(set(int(v) for v in re.split(r"\s+", numbers.strip())))
     return wins, values
+
+
+def parse_seeds(path: str):
+    with Path(path).open("r", encoding="utf-8") as f:
+        almanach = f.read()
+    seeds_pat = re.compile(r"seeds: (?:(\d+ ?)+)\n")
+    seeds_soils_pat = re.compile(r"""seed-to-soil map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M)
+    soils_fert_pat = re.compile(
+        r"""soil-to-fertilizer map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M
+    )
+    fert_water_pat = re.compile(
+        r"""fertilizer-to-water map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M
+    )
+    water_light_pat = re.compile(
+        r"""water-to-light map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M
+    )
+    light_temp_pat = re.compile(
+        r"""light-to-temperature map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M
+    )
+    temp_hum_pat = re.compile(
+        r"""temperature-to-humidity map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M
+    )
+    hum_loc_pat = re.compile(
+        r"""humidity-to-location map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M
+    )
+
+    seeds = [int(x) for x in seeds_pat.search(almanach).group(1).split(" ")]
+
+    def extract_groups(pattern: re.Pattern, almanach: str) -> tuple[int, int, int]:
+        res = pattern.search(almanach).group(1).strip().split("\n")
+        return [tuple(int(x) for x in line.strip().split(" ")) for line in res]
+
+    seeds_soils = extract_groups(seeds_soils_pat, almanach)
+    soils_fert = extract_groups(soils_fert_pat, almanach)
+    fert_water = extract_groups(fert_water_pat, almanach)
+    water_light = extract_groups(water_light_pat, almanach)
+    light_temp = extract_groups(light_temp_pat, almanach)
+    temp_hum = extract_groups(temp_hum_pat, almanach)
+    hum_loc = extract_groups(hum_loc_pat, almanach)
+    return (
+        seeds,
+        seeds_soils,
+        soils_fert,
+        fert_water,
+        water_light,
+        light_temp,
+        temp_hum,
+        hum_loc,
+    )

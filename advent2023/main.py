@@ -1,5 +1,5 @@
 import numpy as np
-from utils import get_cards, get_characters_table, get_lines
+from utils import get_cards, get_characters_table, get_lines, parse_seeds
 from aoc1.utils import extract_first_last_digit, transform_text_digits_to_digits
 from aoc2.utils import extract_game, max_product, possible_max
 from aoc3.utils import get_gears, isolate_digits
@@ -58,3 +58,8 @@ if __name__ == "__main__":
     wins, values = get_cards(INPUT_4_PATH)
     print(f"Solution 4-2: {total_cards(wins, values)}")    
 
+    # AOC 5
+    INPUT_5_PATH = "data/input5.txt"
+
+    # Problem 5-1
+    parse_seeds(INPUT_5_PATH)
