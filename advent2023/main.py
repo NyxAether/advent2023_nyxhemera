@@ -65,3 +65,6 @@ if __name__ == "__main__":
     # Problem 5-1
     alma = Almanach(*(parse_seeds(INPUT_5_PATH)))
     print(f"Solution 5-1: {alma.find_closest_position()}")
+
+    # Problem 5-2
+    print(f"Solution 5-2: {alma.find_closest_position_from_tuple()}")
