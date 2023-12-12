@@ -46,7 +46,7 @@ def get_cards(path: str) -> tuple[set[int], set[int]]:
 def parse_seeds(path: str):
     with Path(path).open("r", encoding="utf-8") as f:
         almanach = f.read()
-    seeds_pat = re.compile(r"seeds: (?:(\d+ ?)+)\n")
+    seeds_pat = re.compile(r"seeds: ((?:\d+ ?)+)\n")
     seeds_soils_pat = re.compile(r"""seed-to-soil map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M)
     soils_fert_pat = re.compile(
         r"""soil-to-fertilizer map:\n((?:\d+ \d+ \d+\n)+)\n""", re.M

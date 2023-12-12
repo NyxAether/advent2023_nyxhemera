@@ -4,6 +4,7 @@ from aoc1.utils import extract_first_last_digit, transform_text_digits_to_digits
 from aoc2.utils import extract_game, max_product, possible_max
 from aoc3.utils import get_gears, isolate_digits
 from aoc4.utils import score, total_cards
+from aoc5.almanach import Almanach
 
 
 if __name__ == "__main__":
@@ -62,4 +63,5 @@ if __name__ == "__main__":
     INPUT_5_PATH = "data/input5.txt"
 
     # Problem 5-1
-    parse_seeds(INPUT_5_PATH)
+    alma = Almanach(*(parse_seeds(INPUT_5_PATH)))
+    print(f"Solution 5-1: {alma.find_closest_position()}")
