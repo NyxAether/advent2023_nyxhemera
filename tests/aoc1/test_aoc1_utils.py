@@ -1,6 +1,6 @@
 
 
-from advent2023.aoc1.utils import extract_first_last_digit, transform_text_digits_to_digits
+from advent2023.aoc1.aoc_utils import extract_first_last_digit, transform_text_digits_to_digits
 
 
 def test_extract_first_last_digit():

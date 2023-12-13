@@ -1,8 +1,8 @@
 from pathlib import Path
-import pytest
-from advent2023.utils import parse_seeds
-from advent2023.aoc5.almanach import Almanach
 import os
+import pytest
+from advent2023.aoc_utils import parse_seeds
+from advent2023.aoc5.almanach import Almanach
 
 @pytest.fixture
 def setup_data():

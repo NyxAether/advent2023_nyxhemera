@@ -1,4 +1,4 @@
-from advent2023.aoc2.utils import extract_game, max_product, possible_max
+from advent2023.aoc2.aoc_utils import extract_game, max_product, possible_max
 
 
 def test_extract_game():

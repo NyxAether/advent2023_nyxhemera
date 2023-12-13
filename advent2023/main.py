@@ -1,13 +1,21 @@
-from utils import get_cards, get_characters_table, get_lines, parse_race, parse_seeds
-from aoc1.utils import extract_first_last_digit, transform_text_digits_to_digits
-from aoc2.utils import extract_game, max_product, possible_max
-from aoc3.utils import get_gears, isolate_digits
-from aoc4.utils import score, total_cards
-from aoc5.almanach import Almanach
-from aoc6.utils import count_wins, wins_product
+from advent2023.aoc_utils import (
+    get_cards,
+    get_characters_table,
+    get_lines,
+    parse_hands,
+    parse_race,
+    parse_seeds,
+)
+from advent2023.aoc1.aoc_utils import extract_first_last_digit, transform_text_digits_to_digits
+from advent2023.aoc2.aoc_utils import extract_game, max_product, possible_max
+from advent2023.aoc3.aoc_utils import get_gears, isolate_digits
+from advent2023.aoc4.aoc_utils import score, total_cards
+from advent2023.aoc5.almanach import Almanach
+from advent2023.aoc6.aoc_utils import count_wins, wins_product
+from advent2023.aoc7.aoc_utils import rank_hands
 
 
-if __name__ == "__main__":
+def main():
     INPUT_1_PATH = "data/input1.txt"
     INPUT_2_PATH = "data/input2.txt"
     lines = get_lines(INPUT_1_PATH)
@@ -24,6 +32,9 @@ if __name__ == "__main__":
         )
     )
     print(f"Solution 1-2: {res_2}")
+    del lines
+    del res_1
+    del res_2
 
     # AOC 2
     INPUT_2_PATH = "data/input2.txt"
@@ -36,6 +47,8 @@ if __name__ == "__main__":
     # Problem 2-2
     games = [max_product(extract_game(line)) for line in lines]
     print(f"Solution 2-2: {sum(games)}")
+    del lines
+    del games
 
     # AOC 3
     INPUT_3_PATH = "data/input3.txt"
@@ -47,6 +60,7 @@ if __name__ == "__main__":
     # Problem 3-2
     characters = get_characters_table(INPUT_3_PATH)
     print(f"Solution 3-2: {sum(get_gears(characters))}")
+    del characters
 
     # AOC 4
     INPUT_4_PATH = "data/input4.txt"
@@ -58,6 +72,8 @@ if __name__ == "__main__":
     # Problem 4-2
     wins, values = get_cards(INPUT_4_PATH)
     print(f"Solution 4-2: {total_cards(wins, values)}")
+    del wins
+    del values
 
     # AOC 5
     INPUT_5_PATH = "data/input5.txt"
@@ -68,6 +84,7 @@ if __name__ == "__main__":
 
     # Problem 5-2
     print(f"Solution 5-2: {alma.find_closest_position_from_tuple()}")
+    del alma
 
     # AOC 6
     INPUT_6_PATH = "data/input6.txt"
@@ -78,3 +95,16 @@ if __name__ == "__main__":
 
     # Problem 6-2
     print(f"Solution 6-2: {count_wins(44826981, 202107611381458)}")
+    del times, distances
+
+    # AOC 7
+    INPUT_7_PATH = "data/input7.txt"
+
+    # Problem 7-1
+    hands = parse_hands(INPUT_7_PATH)
+    print(f"Solution 7-1: {rank_hands(hands)}")
+
+    # Problem 7-2
+    for hand in hands:
+        hand.joker = True
+    print(f"Solution 7-2: {rank_hands(hands)}")

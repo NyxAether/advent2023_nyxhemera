@@ -1,5 +1,5 @@
 import numpy as np
-from advent2023.aoc3.utils import (
+from advent2023.aoc3.aoc_utils import (
     get_all_character_indexes,
     symbole_pos,
     digit_pos,

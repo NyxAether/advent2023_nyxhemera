@@ -1,6 +1,8 @@
 from pathlib import Path
 import re
 
+from advent2023.aoc7.hand import Hand
+
 
 def get_lines(path: Path) -> list:
     """
@@ -31,7 +33,7 @@ def get_characters_table(path: Path) -> list[list[str]]:
     return [[c for c in line] for line in lines]
 
 
-def get_cards(path: str) -> tuple[set[int], set[int]]:
+def get_cards(path: str) -> tuple[list[set[int]], list[set[int]]]:
     wins: list[set[int]] = []
     values: list[set[int]] = []
     with Path(path).open("r", encoding="utf-8") as f:
@@ -99,3 +101,13 @@ def parse_race(path: str) -> tuple[list[int], list[int]]:
         distances = re.split(r"\s+", f.readline().strip())[1:]
         distances = [int(d) for d in distances]
     return times, distances
+
+
+def parse_hands(path: str) -> tuple[list[Hand]]:
+    with Path(path).open("r", encoding="utf-8") as f:
+        lines = f.readlines()
+    hands = [
+        Hand(line.strip().split(" ")[0], int(line.strip().split(" ")[1]))
+        for line in lines
+    ]
+    return hands
