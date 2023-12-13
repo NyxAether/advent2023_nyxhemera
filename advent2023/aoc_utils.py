@@ -111,3 +111,17 @@ def parse_hands(path: str) -> tuple[list[Hand]]:
         for line in lines
     ]
     return hands
+
+
+def parse_desert_map(path: str) -> tuple[str, list[str], list[tuple[str, str]]]:
+    pattern = re.compile(r"(\w+) = \((\w+), (\w+)\)")
+    froms = []
+    tos = []
+    with Path(path).open("r", encoding="utf-8") as f:
+        directions = f.readline().strip()
+        f.readline()
+        for line in f:
+            matches = pattern.search(line)
+            froms.append(matches.group(1))
+            tos.append((matches.group(2), matches.group(3)))
+    return directions, froms, tos

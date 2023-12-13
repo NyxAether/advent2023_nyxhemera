@@ -1,12 +1,17 @@
+from advent2023.aoc8.desert_map import AdvancedDesertMap, DesertMap
 from advent2023.aoc_utils import (
     get_cards,
     get_characters_table,
     get_lines,
+    parse_desert_map,
     parse_hands,
     parse_race,
     parse_seeds,
 )
-from advent2023.aoc1.aoc_utils import extract_first_last_digit, transform_text_digits_to_digits
+from advent2023.aoc1.aoc_utils import (
+    extract_first_last_digit,
+    transform_text_digits_to_digits,
+)
 from advent2023.aoc2.aoc_utils import extract_game, max_product, possible_max
 from advent2023.aoc3.aoc_utils import get_gears, isolate_digits
 from advent2023.aoc4.aoc_utils import score, total_cards
@@ -108,3 +113,21 @@ def main():
     for hand in hands:
         hand.joker = True
     print(f"Solution 7-2: {rank_hands(hands)}")
+    del hands
+
+    # AOC 8
+    INPUT_8_PATH = "data/input8.txt"
+
+    # Problem 8-1
+    directions, froms, tos = parse_desert_map(INPUT_8_PATH)
+    dm = DesertMap(directions, froms, tos)
+    print(f"Solution 8-1: {dm.steps_start_to_end('AAA')[0]}")
+
+    # Problem 8-2
+    adm = AdvancedDesertMap(directions, froms, tos)
+    print(f"Solution 8-2: {adm.advanced_steps_start_to_end()}")
+    del dm, adm
+    
+
+if __name__ == "__main__":
+    main()

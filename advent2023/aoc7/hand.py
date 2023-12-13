@@ -101,9 +101,9 @@ class Hand:
 
     def __ne__(self, other):
         return self.best_hand(self.hand, other.hand) != 0
-    
+
     def __str__(self) -> str:
         return self.hand
-    
+
     def __repr__(self) -> str:
         return self.hand
