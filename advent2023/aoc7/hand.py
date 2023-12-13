@@ -31,7 +31,7 @@ class Hand:
             case "Q":
                 return 12
             case "J":
-                return 11
+                return 1
             case "T":
                 return 10
             case _:
@@ -76,14 +76,13 @@ class Hand:
                 elif self.card_type(card1) < self.card_type(card2):
                     return -1
             return 0
-        
-    def best_replacement(self, hand:str)->str:
-        cards = self.count_cards(hand)
-        if 'J' in cards and cards['J'] < 5:
-            cards['J']=0
-            return hand.replace('J',max(cards))
-        return hand
 
+    def best_replacement(self, hand: str) -> str:
+        cards = self.count_cards(hand)
+        if "J" in cards and cards["J"] < 5:
+            cards["J"] = 0
+            return hand.replace("J", max(cards, key=cards.get))
+        return hand
 
     def __lt__(self, other):
         return self.best_hand(self.hand, other.hand) < 0
@@ -102,3 +101,9 @@ class Hand:
 
     def __ne__(self, other):
         return self.best_hand(self.hand, other.hand) != 0
+    
+    def __str__(self) -> str:
+        return self.hand
+    
+    def __repr__(self) -> str:
+        return self.hand
