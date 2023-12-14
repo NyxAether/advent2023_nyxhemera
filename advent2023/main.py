@@ -1,3 +1,5 @@
+import sys
+from advent2023.aoc10.pipe import Pipe
 from advent2023.aoc8.desert_map import AdvancedDesertMap, DesertMap
 from advent2023.aoc9.pascal import Pascal
 from advent2023.aoc_utils import (
@@ -136,6 +138,19 @@ def main():
     # Problem 9-1
     pascal = Pascal(parse_pascal(INPUT_9_PATH))
     print(f"Solution 9-1: {pascal.compute_sum_preds()}")
+
+    # Problem 9-2
+    print(f"Solution 9-2: {pascal.compute_sum_prevs()}")
+    del pascal
+
+    # AOC 10
+    INPUT_10_PATH = "data/input10.txt"
+
+    # Problem 10-1
+    pipes=Pipe(INPUT_10_PATH)
+    sys.setrecursionlimit(pipes.shape[0] * pipes.shape[1])
+    print(f"Solution 10-1: {pipes.get_longest_point()}")
+    sys.setrecursionlimit(1000)
 
 
 if __name__ == "__main__":
