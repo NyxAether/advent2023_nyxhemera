@@ -125,3 +125,8 @@ def parse_desert_map(path: str) -> tuple[str, list[str], list[tuple[str, str]]]:
             froms.append(matches.group(1))
             tos.append((matches.group(2), matches.group(3)))
     return directions, froms, tos
+
+def parse_pascal(path: str) -> list[list[int]]:
+    with Path(path).open("r", encoding="utf-8") as f:
+        lines = f.readlines()
+    return [[int(x) for x in line.strip().split(" ")] for line in lines]

@@ -1,10 +1,12 @@
 from advent2023.aoc8.desert_map import AdvancedDesertMap, DesertMap
+from advent2023.aoc9.pascal import Pascal
 from advent2023.aoc_utils import (
     get_cards,
     get_characters_table,
     get_lines,
     parse_desert_map,
     parse_hands,
+    parse_pascal,
     parse_race,
     parse_seeds,
 )
@@ -128,6 +130,13 @@ def main():
     print(f"Solution 8-2: {adm.advanced_steps_start_to_end()}")
     del dm, adm
     
+    # AOC 9
+    INPUT_9_PATH = "data/input9.txt"
+
+    # Problem 9-1
+    pascal = Pascal(parse_pascal(INPUT_9_PATH))
+    print(f"Solution 9-1: {pascal.compute_sum_preds()}")
+
 
 if __name__ == "__main__":
     main()
