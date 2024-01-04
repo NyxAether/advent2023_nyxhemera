@@ -148,7 +148,7 @@ def main():
 
     # Problem 10-1
     pipes=Pipe(INPUT_10_PATH)
-    sys.setrecursionlimit(pipes.shape[0] * pipes.shape[1])
+    sys.setrecursionlimit(100*pipes.shape[0] * pipes.shape[1])
     print(f"Solution 10-1: {pipes.get_longest_point()}")
     sys.setrecursionlimit(1000)
 
